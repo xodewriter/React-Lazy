@@ -1,12 +1,13 @@
 import './App.css';
+import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
 // Components
-import Notes from './components/Notes';
-import Steps from './components/Steps';
-import Router from './components/Router';
-import Profile from './components/Profile';
-import Dashboard from './components/Dashboard';
+const Notes = React.lazy(() => import('./components/Notes'));
+const Steps = React.lazy(() => import('./components/Steps'));
+const Router = React.lazy(() => import('./components/Router'));
+const Profile = React.lazy(() => import('./components/Profile'));
+const Dashboard = React.lazy(() => import('./components/Dashboard'));
 
 function App() {
 	return (
@@ -17,13 +18,15 @@ function App() {
 				<Link to='/steps'>Steps</Link> | <Link to='/profile'>Profile</Link> |{' '}
 				<Link to='/dashboard'>Dashboard</Link>
 			</nav>
-			<Routes>
-				<Route path='/' element={<Notes />} />
-				<Route path='/steps' element={<Steps />} />
-				<Route path='/router' element={<Router />} />
-				<Route path='/profile' element={<Profile />} />
-				<Route path='/dashboard' element={<Dashboard />} />
-			</Routes>
+			<React.Suspense fallback={<h2>Loading...</h2>}>
+				<Routes>
+					<Route path='/' element={<Notes />} />
+					<Route path='/steps' element={<Steps />} />
+					<Route path='/router' element={<Router />} />
+					<Route path='/profile' element={<Profile />} />
+					<Route path='/dashboard' element={<Dashboard />} />
+				</Routes>
+			</React.Suspense>
 		</div>
 	);
 }
