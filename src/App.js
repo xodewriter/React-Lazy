@@ -1,31 +1,29 @@
 import './App.css';
+import { Routes, Route, Link } from 'react-router-dom';
+
+// Components
+import Notes from './components/Notes';
+import Steps from './components/Steps';
+import Router from './components/Router';
+import Profile from './components/Profile';
+import Dashboard from './components/Dashboard';
 
 function App() {
 	return (
 		<div className='App'>
 			<h1>React Code Splitting</h1>
-			<p>
-				Code-splitting your app can help you <b>“lazy-load”</b> just the things
-				that are currently needed by the user, which can dramatically improve
-				the performance of your app. While you haven’t reduced the overall
-				amount of code in your app, you’ve avoided loading code that the user
-				may never need, and reduced the amount of code needed during the initial
-				load.
-			</p>
-			<h2>KEY POINTS</h2>
-			<ul>
-				<li>Dynamially load code</li>
-				<li>
-					<b>"lazy-load"</b> just the things that are currently needed by the
-					user
-				</li>
-				<li>Can drastically improve performance of app</li>
-				<li>The amount of code is the same and hasn't been reduced</li>
-				<li>
-					Avoid loading code that the user may never need during the initial
-					load
-				</li>
-			</ul>
+			<nav>
+				<Link to='/'>Home</Link> | <Link to='/router'>Router</Link> |{' '}
+				<Link to='/steps'>Steps</Link> | <Link to='/profile'>Profile</Link> |{' '}
+				<Link to='/dashboard'>Dashboard</Link>
+			</nav>
+			<Routes>
+				<Route path='/' element={<Notes />} />
+				<Route path='/steps' element={<Steps />} />
+				<Route path='/router' element={<Router />} />
+				<Route path='/profile' element={<Profile />} />
+				<Route path='/dashboard' element={<Dashboard />} />
+			</Routes>
 		</div>
 	);
 }
